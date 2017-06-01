@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head jsfc="h:head">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Java EE Web App</title>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body jsfc="h:body">
+	<script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$('div.text-warning').text('Error message is here.')
+	})
+	</script>
+	<div class="container">
+		<form jsfc="h:form">
+			<div class="panel panel-default">
+				<div class="panel-heading">Input Form</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<label jsfc="h:outputLabel" for="firstName">First Name:</label>
+						<input jsfc="h:inputText" class="form-control" type="text" id="firstName" value="#{personForm.firstName}" label="First Name"/>
+						<div jsfc="h:message" class="text-warning" for="firstName" showSummary="false"><!-- error message --></div>
+					</div>
+					<div class="form-group">
+						<label jsfc="h:outputLabel" for="lastName">Last Name:</label>
+						<input jsfc="h:inputText" class="form-control" type="text" id="lastName" value="#{personForm.lastName}" label="Last Name" />
+						<div jsfc="h:message" class="text-warning" for="lastName"><!-- error message --></div>
+					</div>
+					<input jsfc="h:commandButton"
+					    type="submit"
+						class="btn btn-default"
+						action="${personFacade.create(personForm.toEntity())}"
+						value="Add" />
+				</div>
+			</div>
+			<table class="table table-condensed table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr jsfc="ui:repeat" value="#{personFacade.findAll()}" var="person">
+						<td>#{person.id}</td>
+						<td>#{person.firstName}</td>
+						<td>#{person.lastName}</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<br />
+		<table class="table table-condensed table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Date</th>
+					<th>Message</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr jsfc="ui:repeat" value="#{traceFacade.findAll()}" var="trace">
+					<td>#{trace.id}</td>
+					<td>#{trace.date}</td>
+					<td>#{trace.message}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
