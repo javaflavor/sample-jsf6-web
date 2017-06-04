@@ -13,7 +13,7 @@
 	<!-- Properties -->
 	<!-- ================================================================== -->
 	<properties>
-		<context-root>${project.artifactId}</context-root>
+		<context-root>/</context-root>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- ===== maven-compiler-plugin configurations ===== -->
 		<maven.compiler.target>1.8</maven.compiler.target>
